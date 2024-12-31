@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Hierarchy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fc;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hierarchy {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .node {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            width: 220px;
+        }
+
+        .node:hover {
+            background-color: #e9f5ff;
+            transform: scale(1.05);
+        }
+
+        .node span {
+            font-size: 20px;
+            font-weight: 500;
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .node span::before {
+            content: '\25B6'; /* Right arrow symbol */
+            position: absolute;
+            left: -30px;
+            top: 0;
+            font-size: 18px;
+            color: #007bff;
+            transition: transform 0.3s ease;
+        }
+
+        .active span::before {
+            transform: rotate(90deg);
+        }
+
+        .children {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding-top: 15px;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .children > .node {
+            flex-direction: column;
+            margin-top: 15px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .active > .children > .node {
+            display: block;
+            opacity: 1;
+        }
+
+        .active > .children {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .arrow {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #007bff;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .active .arrow {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="hierarchy">
+        <div class="node" onclick="toggleVisibility(event)">
+            <span>RAJ SAXENA</span>
+            <div class="children">
+                <!-- Sudhir006 Node -->
+                <div class="node" onclick="toggleVisibility(event)">
+                    <span>Sudhir006</span>
+                    <div class="children">
+                        <div class="node" onclick="toggleVisibility(event)">
+                            <span>Vinay006</span>
+                            <div class="children">
+                                <div class="node">
+                                    <span>Vinay008</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sudhir010 Node -->
+                <div class="node" onclick="toggleVisibility(event)">
+                    <span>Sudhir010</span>
+                    <div class="children">
+                        <div class="node" onclick="toggleVisibility(event)">
+                            <span>Sudhir020</span>
+                            <div class="children">
+                                <div class="node">
+                                    <span>Sudhir025</span>
+                                </div>
+                                <div class="node">
+                                    <span>Sudhir024</span>
+                                </div>
+                                <div class="node">
+                                    <span>Sudhir023</span>
+                                </div>
+                                <div class="node">
+                                    <span>Sudhir022</span>
+                                </div>
+                                <div class="node">
+                                    <span>Sudhir021</span>
+                                </div>
+                                <div class="node">
+                                    <span>Pradeep01</span>
+                                </div>
+                                <div class="node">
+                                    <span>Niranjan01</span>
+                                </div>
+                                <div class="node">
+                                    <span>Rubi Debi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sudhir011 Node -->
+                        <div class="node" onclick="toggleVisibility(event)">
+                            <span>Sudhir011</span>
+                            <div class="children">
+                                <div class="node">
+                                    <span>Sudhir019</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sudhir013 Node -->
+                        <div class="node">
+                            <span>Sudhir013</span>
+                        </div>
+
+                        <!-- Sudhir014 Node -->
+                        <div class="node" onclick="toggleVisibility(event)">
+                            <span>Sudhir014</span>
+                            <div class="children">
+                                <div class="node">
+                                    <span>Sudhir017 or Baijnath01</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sudhir015 Node -->
+                        <div class="node" onclick="toggleVisibility(event)">
+                            <span>Sudhir015</span>
+                            <div class="children">
+                                <div class="node">
+                                    <span>Sudhir018</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sudhir016 Node -->
+                        <div class="node" onclick="toggleVisibility(event)">
+                            <span>Sudhir016</span>
+                            <div class="children">
+                                <div class="node">
+                                    <span>Vinay451</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleVisibility(event) {
+            // Prevent event propagation so it doesn't trigger on parent nodes
+            event.stopPropagation();
+            
+            // Toggle 'active' class to show/hide child nodes
+            const node = event.currentTarget;
+            node.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
