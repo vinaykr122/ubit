@@ -1,76 +1,379 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Muskan Furniture Bill</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Kumar Resume</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1 { text-align: center; }
-        h3 { margin-top: 20px; }
-        table { width: 50%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid black; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #1e293b; /* Dark Navy Slate */
+            --accent-color: #334155;
+            --text-color: #333333;
+            --light-text: #64748b;
+            --border-color: #e2e8f0;
+            --bg-color: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 10.5pt;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .resume-container {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 40px 45px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        header {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 28pt;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            line-height: 1;
+            font-weight: 700;
+        }
+
+        .contact-info {
+            font-size: 10pt;
+            color: var(--text-color);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .separator {
+            color: var(--light-text);
+        }
+
+        /* LAYOUT GRID */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 65% 30%; /* Left Main / Right Sidebar */
+            gap: 5%;
+        }
+
+        /* SECTIONS */
+        h2 {
+            font-size: 12pt;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+            margin-bottom: 15px;
+            margin-top: 25px;
+            font-weight: 700;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 2px;
+        }
+
+        .role-meta {
+            font-size: 9.5pt;
+            color: var(--light-text);
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .job-location {
+            font-style: italic;
+        }
+
+        p {
+            margin-bottom: 10px;
+            text-align: left;
+            font-size: 10pt;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 16px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 4px;
+            padding-left: 5px;
+        }
+
+        /* RIGHT COLUMN SPECIFICS */
+        .right-column h2 {
+            margin-top: 0px;
+            margin-bottom: 12px;
+        }
+
+        .right-column section {
+            margin-bottom: 25px;
+        }
+
+        .skill-group {
+            margin-bottom: 12px;
+        }
+        
+        .skill-label {
+            display: block;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 9.5pt;
+            margin-bottom: 2px;
+        }
+
+        .skill-list {
+            font-size: 9.5pt;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        .edu-block, .cert-block {
+            margin-bottom: 15px;
+        }
+
+        .edu-school {
+            font-size: 9.5pt;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        .edu-meta {
+            font-size: 9pt;
+            color: var(--light-text);
+        }
+
+        .cert-list {
+            margin-left: 0;
+            list-style-type: none;
+        }
+        
+        .cert-list li {
+            font-size: 9pt;
+            margin-bottom: 2px;
+            padding-left: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dotted var(--primary-color);
+        }
+
+        /* PRINT MEDIA QUERY */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .resume-container {
+                box-shadow: none;
+                width: 100%;
+                margin: 0;
+                padding: 30px 40px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>🧾 MUSKAN FURNITURE</h1>
-    <p style="text-align: center;">
-        MITHAPUR, PATNA<br>
-        PATNA, BIHAR, INDIA - 800020<br>
-        Tel.: 9973435222 | Email: sudhir.478.sk@gmail.com
-    </p>
-    <hr>
-    <h3>Final Bill</h3>
-    <p><strong>Date</strong>: 28-May-2025<br>
-       <strong>Bill No.</strong>: MUSKAN-BILL-2025-003</p>
-    <p><strong>Deliver to</strong>:<br>
-       MITHAPUR, PATNA<br>
-       PATNA, BIHAR, INDIA - 800020</p>
-    <hr>
-    <h3>Subject: Supply of PLASTKING WPC Doors with Frames and Accessories</h3>
-    <h3>🔹 Itemized Details</h3>
-    <p><strong>Door Type 1 (With Frame & Hardware)</strong><br>
-       - Brand: PLASTKING<br>
-       - Size: 7' × 39" (3.25 ft) = 22.75 sqft<br>
-       - Quantity: 2<br>
-       - Total Area: 45.5 sqft<br>
-       - Rate: ₹700/sqft<br>
-       - Amount: ₹31,850</p>
-    <p><strong>Door Type 2 (With Frame & Hardware)</strong><br>
-       - Brand: PLASTKING<br>
-       - Size: 7' × 46" (3.83 ft) ≈ 28 sqft<br>
-       - Quantity: 3<br>
-       - Total Area: 84 sqft<br>
-       - Rate: ₹700/sqft<br>
-       - Amount: ₹58,800</p>
-    <h3>✅ Included Accessories Per Door</h3>
-    <ul>
-        <li>Outer Frame: 62 mm × 121 mm</li>
-        <li>Hinges: 3 pcs (S.S. Premium 5" × 12 mm)</li>
-        <li>Screws: 38 mm × 8 mm (S.S.)</li>
-        <li>Mortise Door Lock: S.S. Body</li>
-        <li>Tower Bolt: 2 pcs (S.S. 300 mm)</li>
-    </ul>
-    <h3>📊 Price Summary</h3>
-    <table>
-        <tr>
-            <th>Item Description</th>
-            <th>Amount (₹)</th>
-        </tr>
-        <tr>
-            <td>Door Type 1 (45.5 sqft)</td>
-            <td>31,850</td>
-        </tr>
-        <tr>
-            <td>Door Type 2 (84 sqft)</td>
-            <td>58,800</td>
-        </tr>
-        <tr>
-            <td><strong>Grand Total Payable</strong></td>
-            <td><strong>90,650</strong></td>
-        </tr>
-    </table>
-    <hr>
-    <p><strong>Authorized Signatory</strong><br>
-       MUSKAN FURNITURE</p>
+
+    <div class="resume-container">
+        <!-- HEADER -->
+        <header>
+            <h1>Vinay Kumar</h1>
+            <div class="contact-info">
+                <span>Kolkata, 700102</span>
+                <span class="separator">•</span>
+                <span>+91 6204078366</span>
+                <span class="separator">•</span>
+                <span>vinaykrraj333@gmail.com</span>
+            </div>
+        </header>
+
+        <div class="content-grid">
+            
+            <!-- LEFT COLUMN (Main Content) -->
+            <div class="left-column">
+                
+                <!-- SUMMARY -->
+                <h2>Summary</h2>
+                <p>
+                    Accomplished Chat Support Representative at Tech Mahindra, excelling in customer service and problem-solving. Leveraged communication skills to resolve 90% of issues on first contact. Proficient in React.js and Git, enhancing team collaboration and technical support. Recognized for delivering exceptional service while managing multiple customer interactions efficiently.
+                </p>
+
+                <!-- EXPERIENCE -->
+                <h2>Experience</h2>
+                
+                <div class="job">
+                    <h3>Chat Support Representative</h3>
+                    <div class="role-meta">
+                        <span>Tech Mahindra</span>
+                        <span>08/2025 – 12/2025</span>
+                    </div>
+                    <div class="role-meta job-location">Kolkata, IN</div>
+                    <ul>
+                        <li>Assisted customers with order processing inquiries via chat support.</li>
+                        <li>Delivered high-quality customer support while adhering to company policies.</li>
+                        <li>Utilized chat tools efficiently to manage multiple customer conversations simultaneously.</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <h3>Customer Service Executive</h3>
+                    <div class="role-meta">
+                        <span>Fusion CX (Meesho Project)</span>
+                        <span>03/2025 – 05/2025</span>
+                    </div>
+                    <ul>
+                        <li>Handled inbound voice support in Hindi and English for ecommerce customers.</li>
+                        <li>Resolved most issues during first contact, minimizing escalations.</li>
+                        <li>Maintained call logs and communicated unresolved issues to backend teams.</li>
+                        <li>Known for clear, calm communication even under pressure.</li>
+                    </ul>
+                </div>
+
+                <!-- PROJECTS -->
+                <h2>Projects</h2>
+                
+                <div class="project">
+                    <h3>Leo Mark App</h3>
+                    <p>
+                        A complete personal productivity and routine management platform. Combines daily routine tracking (e.g., brushing, meals, study, gym) with dynamic task management features.
+                    </p>
+                    <ul>
+                        <li>Implemented task filtering, status grouping, priority tags, and routine-based scheduling.</li>
+                        <li>Integrated Eisenhower Matrix smart logic for task prioritization.</li>
+                        <li>Built with <strong>React.js</strong> and <strong>Firebase</strong> (Firestore, Auth), styled with <strong>Tailwind CSS</strong>, and hosted on <strong>Vercel</strong>.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN (Sidebar) -->
+            <div class="right-column">
+                
+                <!-- SKILLS -->
+                <section>
+                    <h2>Skills</h2>
+                    <div class="skill-group">
+                        <span class="skill-label">Web Development</span>
+                        <div class="skill-list">React.js, Next.js, JavaScript, Python, Java, HTML5, CSS3, Tailwind CSS, Firebase</div>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-label">Tools & Version Control</span>
+                        <div class="skill-list">Git, GitHub, Vercel, VS Code</div>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-label">Data Management</span>
+                        <div class="skill-list">Microsoft Excel, Google Sheets</div>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-label">Soft Skills</span>
+                        <div class="skill-list">Communication, Customer Service, Tech Support, Team Collaboration, Problem Solving</div>
+                    </div>
+                </section>
+
+                <!-- EDUCATION -->
+                <section>
+                    <h2>Education</h2>
+                    
+                    <div class="edu-block">
+                        <h3>B. Tech — CSE</h3>
+                        <div class="edu-school">Budge Budge Institute of Technology</div>
+                        <div class="edu-meta">Kolkata | Expected 06/2027</div>
+                        <div class="edu-meta">Currently in 3rd Year</div>
+                    </div>
+
+                    <div class="edu-block">
+                        <h3>Science (12th)</h3>
+                        <div class="edu-school">R.P.S College, Patna</div>
+                        <div class="edu-meta">GPA: 70.4%</div>
+                    </div>
+
+                    <div class="edu-block">
+                        <h3>10th Grade</h3>
+                        <div class="edu-school">Vidya Niketan, Patna</div>
+                        <div class="edu-meta">GPA: 61.4%</div>
+                    </div>
+                </section>
+
+                <!-- LANGUAGES -->
+                <section>
+                    <h2>Languages</h2>
+                    <div class="skill-list">
+                        <strong>Hindi:</strong> Fluent<br>
+                        <strong>English:</strong> Conversational
+                    </div>
+                </section>
+
+                <!-- CERTIFICATIONS -->
+                <section>
+                    <h2>Certifications</h2>
+                    <div class="cert-block">
+                        <h3>Kushal Yuva Program</h3>
+                        <div class="edu-school">Bihar Skill Development Mission</div>
+                        <ul class="cert-list">
+                            <li><span>BS-CIT (IT):</span> <strong>82.11%</strong></li>
+                            <li><span>BS-CLS (Language):</span> <strong>92.67%</strong></li>
+                            <li><span>BS-CSS (Soft Skills):</span> <strong>90.73%</strong></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- WEBSITE -->
+                <section>
+                    <h2>Portfolio</h2>
+                    <div class="skill-list">
+                        <a href="https://vinay-leo-portfolio.vercel.app/" target="_blank">vinay-leo-portfolio.vercel.app</a>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
