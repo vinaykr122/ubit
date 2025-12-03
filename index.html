@@ -28,8 +28,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            font-size: 11.5pt; /* Increased to 11.5pt to fill space */
-            line-height: 1.8; /* Significantly increased line height */
+            font-size: 10.5pt; /* Reduced to fit single page */
+            line-height: 1.5; /* Reduced line height */
             color: var(--text-color);
             background-color: var(--bg-color);
             display: flex;
@@ -42,7 +42,7 @@
             min-height: 297mm;
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            padding: 60px 55px; /* Increased padding */
+            padding: 45px 45px; /* balanced padding */
             display: flex;
             flex-direction: column;
             position: relative;
@@ -51,25 +51,25 @@
         /* HEADER */
         header {
             border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 35px; /* Increased */
-            margin-bottom: 40px; /* Increased */
+            padding-bottom: 20px; /* Reduced */
+            margin-bottom: 25px; /* Reduced */
         }
 
         h1 {
-            font-size: 32pt; /* Increased */
+            font-size: 28pt; /* Reduced */
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--primary-color);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             line-height: 1;
             font-weight: 700;
         }
 
         .contact-info {
-            font-size: 11pt;
+            font-size: 10pt;
             color: var(--text-color);
             display: flex;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
             align-items: center;
         }
@@ -92,14 +92,14 @@
 
         /* SECTIONS */
         h2 {
-            font-size: 13pt;
+            font-size: 12pt;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             color: var(--primary-color);
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-bottom: 25px; /* Increased */
-            margin-top: 40px; /* Increased */
+            padding-bottom: 6px;
+            margin-bottom: 15px; /* Reduced */
+            margin-top: 25px; /* Reduced */
             font-weight: 700;
         }
 
@@ -108,87 +108,87 @@
         }
 
         h3 {
-            font-size: 12pt;
+            font-size: 11pt;
             font-weight: 700;
             color: #000;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .role-meta {
-            font-size: 11pt;
+            font-size: 10pt;
             color: var(--light-text);
             font-weight: 500;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
         }
 
         .job-location {
             font-style: italic;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         p {
-            margin-bottom: 20px; /* Increased */
+            margin-bottom: 12px; /* Reduced */
             text-align: left;
-            font-size: 11.5pt;
+            font-size: 10.5pt;
         }
 
         ul {
             list-style-type: disc;
-            margin-left: 20px;
-            margin-bottom: 30px; /* Increased */
+            margin-left: 18px;
+            margin-bottom: 15px; /* Reduced */
         }
 
         li {
-            margin-bottom: 10px; /* Increased bullet spacing */
-            padding-left: 5px;
+            margin-bottom: 5px; /* Reduced */
+            padding-left: 4px;
         }
 
         .job, .project {
-            margin-bottom: 35px; /* Significantly increased spacing between jobs */
+            margin-bottom: 20px; /* Reduced */
         }
 
         /* RIGHT COLUMN SPECIFICS */
         .right-column h2 {
             margin-top: 0px;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
 
         .right-column section {
-            margin-bottom: 40px; /* Increased */
+            margin-bottom: 25px; /* Reduced */
         }
 
         .skill-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .skill-label {
             display: block;
             color: var(--primary-color);
             font-weight: 700;
-            font-size: 11.5pt;
-            margin-bottom: 5px;
+            font-size: 10.5pt;
+            margin-bottom: 3px;
         }
 
         .skill-list {
-            font-size: 11.5pt;
+            font-size: 10.5pt;
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .edu-block, .cert-block {
-            margin-bottom: 25px; /* Increased */
+            margin-bottom: 18px;
         }
 
         .edu-school {
-            font-size: 11.5pt;
+            font-size: 10.5pt;
             color: var(--text-color);
             font-weight: 500;
         }
         
         .edu-meta {
-            font-size: 11pt;
+            font-size: 10pt;
             color: var(--light-text);
         }
 
@@ -198,8 +198,8 @@
         }
         
         .cert-list li {
-            font-size: 11pt;
-            margin-bottom: 8px;
+            font-size: 10pt;
+            margin-bottom: 6px;
             padding-left: 0;
             display: flex;
             justify-content: space-between;
@@ -418,7 +418,7 @@
             @page { margin: 0; size: auto; }
             .print-btn, .ai-fab, .ai-window { display: none !important; }
             html, body { margin: 0; padding: 0; background: white; height: 100%; width: 100%; }
-            .resume-container { box-shadow: none; width: 100%; min-height: auto; margin: 0; padding: 60px 55px; break-inside: avoid; }
+            .resume-container { box-shadow: none; width: 100%; min-height: auto; margin: 0; padding: 45px 45px; break-inside: avoid; }
         }
     </style>
 </head>
