@@ -25,13 +25,13 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            font-size: 10.5pt;
-            line-height: 1.6;
+            font-size: 9.5pt; /* Reduced from 10.5pt */
+            line-height: 1.4; /* Reduced from 1.6 */
             color: var(--text-color);
             background-color: var(--bg-color);
             display: flex;
             justify-content: center;
-            padding: 40px;
+            padding: 20px;
         }
 
         .resume-container {
@@ -39,7 +39,7 @@
             min-height: 297mm;
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            padding: 40px 45px;
+            padding: 30px 35px; /* Reduced padding */
             display: flex;
             flex-direction: column;
         }
@@ -47,25 +47,25 @@
         /* HEADER */
         header {
             border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            padding-bottom: 15px; /* Reduced */
+            margin-bottom: 20px; /* Reduced */
         }
 
         h1 {
-            font-size: 28pt;
+            font-size: 24pt; /* Reduced */
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--primary-color);
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             line-height: 1;
             font-weight: 700;
         }
 
         .contact-info {
-            font-size: 10pt;
+            font-size: 9pt;
             color: var(--text-color);
             display: flex;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
             align-items: center;
         }
@@ -82,20 +82,20 @@
         /* LAYOUT GRID */
         .content-grid {
             display: grid;
-            grid-template-columns: 65% 30%; /* Left Main / Right Sidebar */
+            grid-template-columns: 66% 29%; /* Left Main / Right Sidebar */
             gap: 5%;
         }
 
         /* SECTIONS */
         h2 {
-            font-size: 12pt;
+            font-size: 11pt;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             color: var(--primary-color);
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 4px;
-            margin-bottom: 15px;
-            margin-top: 25px;
+            padding-bottom: 3px;
+            margin-bottom: 10px; /* Reduced */
+            margin-top: 18px; /* Reduced */
             font-weight: 700;
         }
 
@@ -104,82 +104,87 @@
         }
 
         h3 {
-            font-size: 11pt;
+            font-size: 10pt;
             font-weight: 700;
             color: #000;
             margin-bottom: 2px;
         }
 
         .role-meta {
-            font-size: 9.5pt;
+            font-size: 9pt;
             color: var(--light-text);
             font-weight: 500;
-            margin-bottom: 8px;
+            margin-bottom: 4px; /* Reduced */
             display: flex;
             justify-content: space-between;
         }
 
         .job-location {
             font-style: italic;
+            margin-bottom: 6px;
         }
 
         p {
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* Reduced */
             text-align: left;
-            font-size: 10pt;
+            font-size: 9.5pt;
         }
 
         ul {
             list-style-type: disc;
-            margin-left: 16px;
-            margin-bottom: 15px;
+            margin-left: 14px;
+            margin-bottom: 10px; /* Reduced */
         }
 
         li {
-            margin-bottom: 4px;
-            padding-left: 5px;
+            margin-bottom: 2px; /* Reduced */
+            padding-left: 3px;
+        }
+
+        .job, .project {
+            margin-bottom: 12px;
         }
 
         /* RIGHT COLUMN SPECIFICS */
         .right-column h2 {
             margin-top: 0px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .right-column section {
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Reduced */
         }
 
         .skill-group {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .skill-label {
             display: block;
             color: var(--primary-color);
             font-weight: 700;
-            font-size: 9.5pt;
-            margin-bottom: 2px;
+            font-size: 9pt;
+            margin-bottom: 1px;
         }
 
         .skill-list {
-            font-size: 9.5pt;
+            font-size: 9pt;
             color: var(--text-color);
-            line-height: 1.4;
+            line-height: 1.35;
         }
 
         .edu-block, .cert-block {
-            margin-bottom: 15px;
+            margin-bottom: 12px; /* Reduced */
         }
 
         .edu-school {
-            font-size: 9.5pt;
+            font-size: 9pt;
             color: var(--text-color);
             font-weight: 500;
         }
         
         .edu-meta {
-            font-size: 9pt;
+            font-size: 8.5pt;
             color: var(--light-text);
         }
 
@@ -189,7 +194,7 @@
         }
         
         .cert-list li {
-            font-size: 9pt;
+            font-size: 8.5pt;
             margin-bottom: 2px;
             padding-left: 0;
             display: flex;
@@ -227,19 +232,30 @@
 
         /* PRINT MEDIA QUERY */
         @media print {
+            @page {
+                margin: 0; /* Removes browser default headers/footers */
+                size: auto;
+            }
+
             .print-btn {
                 display: none !important;
             }
 
-            body {
-                background: white;
+            html, body {
+                margin: 0;
                 padding: 0;
+                background: white;
+                height: 100%;
+                width: 100%;
             }
+
             .resume-container {
                 box-shadow: none;
                 width: 100%;
+                min-height: auto;
                 margin: 0;
-                padding: 30px 40px;
+                padding: 30px 40px; /* Consistent print padding */
+                break-inside: avoid;
             }
         }
     </style>
