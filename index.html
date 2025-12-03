@@ -28,8 +28,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            font-size: 10.5pt; /* Balanced size */
-            line-height: 1.5; /* Balanced spacing */
+            font-size: 10pt; /* Reduced for single page fit */
+            line-height: 1.4; /* Tighter line height */
             color: var(--text-color);
             background-color: var(--bg-color);
             display: flex;
@@ -42,7 +42,7 @@
             min-height: 297mm;
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            padding: 45px 45px; /* Balanced margins */
+            padding: 35px 40px; /* Reduced padding */
             display: flex;
             flex-direction: column;
             position: relative;
@@ -51,25 +51,25 @@
         /* HEADER */
         header {
             border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 20px;
-            margin-bottom: 25px;
+            padding-bottom: 15px; /* Compact */
+            margin-bottom: 20px; /* Compact */
         }
 
         h1 {
-            font-size: 28pt;
+            font-size: 26pt; /* Slightly smaller header */
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             line-height: 1;
             font-weight: 700;
         }
 
         .contact-info {
-            font-size: 10pt;
+            font-size: 9.5pt;
             color: var(--text-color);
             display: flex;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
             align-items: center;
         }
@@ -92,14 +92,14 @@
 
         /* SECTIONS */
         h2 {
-            font-size: 12pt;
+            font-size: 11.5pt;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             color: var(--primary-color);
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 6px;
-            margin-bottom: 15px;
-            margin-top: 25px;
+            padding-bottom: 4px;
+            margin-bottom: 10px; /* Compact */
+            margin-top: 20px; /* Compact */
             font-weight: 700;
         }
 
@@ -108,87 +108,87 @@
         }
 
         h3 {
-            font-size: 11pt;
+            font-size: 10.5pt;
             font-weight: 700;
             color: #000;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .role-meta {
-            font-size: 10pt;
+            font-size: 9.5pt;
             color: var(--light-text);
             font-weight: 500;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
         }
 
         .job-location {
             font-style: italic;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         p {
-            margin-bottom: 12px;
+            margin-bottom: 8px; /* Compact */
             text-align: left;
-            font-size: 10.5pt;
+            font-size: 10pt;
         }
 
         ul {
             list-style-type: disc;
-            margin-left: 18px;
-            margin-bottom: 15px;
+            margin-left: 16px;
+            margin-bottom: 12px; /* Compact */
         }
 
         li {
-            margin-bottom: 5px;
+            margin-bottom: 3px; /* Compact */
             padding-left: 4px;
         }
 
         .job, .project {
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Compact */
         }
 
         /* RIGHT COLUMN SPECIFICS */
         .right-column h2 {
             margin-top: 0px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .right-column section {
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Compact */
         }
 
         .skill-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         
         .skill-label {
             display: block;
             color: var(--primary-color);
             font-weight: 700;
-            font-size: 10.5pt;
-            margin-bottom: 3px;
+            font-size: 10pt;
+            margin-bottom: 2px;
         }
 
         .skill-list {
-            font-size: 10.5pt;
+            font-size: 10pt;
             color: var(--text-color);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .edu-block, .cert-block {
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
 
         .edu-school {
-            font-size: 10.5pt;
+            font-size: 10pt;
             color: var(--text-color);
             font-weight: 500;
         }
         
         .edu-meta {
-            font-size: 10pt;
+            font-size: 9.5pt;
             color: var(--light-text);
         }
 
@@ -198,8 +198,8 @@
         }
         
         .cert-list li {
-            font-size: 10pt;
-            margin-bottom: 6px;
+            font-size: 9.5pt;
+            margin-bottom: 4px;
             padding-left: 0;
             display: flex;
             justify-content: space-between;
@@ -418,7 +418,7 @@
             @page { margin: 0; size: auto; }
             .print-btn, .ai-fab, .ai-window { display: none !important; }
             html, body { margin: 0; padding: 0; background: white; height: 100%; width: 100%; }
-            .resume-container { box-shadow: none; width: 100%; min-height: auto; margin: 0; padding: 45px 45px; break-inside: avoid; }
+            .resume-container { box-shadow: none; width: 100%; min-height: auto; margin: 0; padding: 35px 40px; break-inside: avoid; }
         }
     </style>
 </head>
