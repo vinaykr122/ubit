@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinay Kumar - Smart Resume</title>
+    <title>Vinay Kumar - Advanced Resume</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
         :root {
-            --primary-color: #1e293b; /* Dark Navy Slate */
+            --primary-color: #1e293b;
             --accent-color: #334155;
-            --text-color: #333333;
-            --light-text: #64748b;
-            --border-color: #e2e8f0;
-            --bg-color: #f8fafc;
-            --chat-bg: #ffffff;
-            --user-msg-bg: #1e293b;
-            --ai-msg-bg: #f1f5f9;
+            --text-color: #1f2937;
+            --light-text: #6b7280;
+            --border-color: #e5e7eb;
+            --bg-body: #eef2f6;
+            --paper-bg: #ffffff;
+            --tag-bg: #f3f4f6;
+            --tag-text: #374151;
+        }
+
+        /* Dark Mode Variables */
+        body.dark-mode {
+            --bg-body: #111827;
+            --text-color: #f3f4f6;
         }
 
         * {
@@ -27,40 +35,107 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            font-size: 10pt; /* Reduced for single page fit */
-            line-height: 1.4; /* Tighter line height */
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 10.5pt;
+            line-height: 1.5;
             color: var(--text-color);
-            background-color: var(--bg-color);
+            background-color: var(--bg-body);
             display: flex;
-            justify-content: center;
-            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            min-height: 100vh;
+            transition: background-color 0.3s;
         }
+
+        /* --- CONTROLS BAR --- */
+        .controls-wrapper {
+            width: 100%;
+            max-width: 210mm;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .controls-container {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tabs { display: flex; gap: 8px; }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--primary-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover { background: #f8fafc; }
+        
+        .btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .btn-print { background: #059669; color: white; border: none; }
+        .btn-print:hover { background: #047857; }
+
+        .btn-edit.editing { background: #eab308; color: white; border: none; animation: pulse 2s infinite; }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
+
+        /* --- RESUME PAPER LAYOUT --- */
+        .resume-wrapper { display: none; transform-origin: top center; }
+        .resume-wrapper.active { display: flex; }
 
         .resume-container {
             width: 210mm;
             min-height: 297mm;
-            background: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            padding: 35px 40px; /* Reduced padding */
+            background: var(--paper-bg);
+            padding: 40px 45px;
             display: flex;
             flex-direction: column;
             position: relative;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            color: #1f2937;
         }
 
         /* HEADER */
         header {
             border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 15px; /* Compact */
-            margin-bottom: 20px; /* Compact */
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
         }
 
+        .header-content { flex: 1; }
+
         h1 {
-            font-size: 26pt; /* Slightly smaller header */
+            font-size: 28pt;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             color: var(--primary-color);
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             line-height: 1;
             font-weight: 700;
         }
@@ -69,650 +144,513 @@
             font-size: 9.5pt;
             color: var(--text-color);
             display: flex;
-            gap: 12px;
             flex-wrap: wrap;
+            gap: 12px;
             align-items: center;
         }
 
-        .contact-info span {
+        .contact-item {
             display: flex;
             align-items: center;
+            gap: 6px;
         }
+
+        .contact-item i { color: var(--primary-color); font-size: 0.9em; }
+        .contact-item a { color: inherit; text-decoration: none; }
         
-        .separator {
-            color: var(--light-text);
+        /* QR CODE */
+        .qr-code {
+            width: 70px;
+            height: 70px;
+            margin-left: 15px;
+            border: 1px solid var(--border-color);
+            padding: 4px;
+            background: white;
         }
 
-        /* LAYOUT GRID */
+        /* GRID SYSTEM */
         .content-grid {
-            display: grid;
-            grid-template-columns: 65% 30%;
-            gap: 5%;
+            display: flex;
+            flex-direction: row;
+            gap: 35px;
+            flex-grow: 1;
         }
 
-        /* SECTIONS */
+        .left-column { width: 63%; }
+        .right-column { width: 37%; }
+
+        /* SECTIONS & TYPOGRAPHY */
         h2 {
-            font-size: 11.5pt;
+            font-size: 12pt;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             color: var(--primary-color);
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 4px;
-            margin-bottom: 10px; /* Compact */
-            margin-top: 20px; /* Compact */
+            padding-bottom: 6px;
+            margin-bottom: 15px;
+            margin-top: 25px;
             font-weight: 700;
         }
 
-        h2:first-of-type {
-            margin-top: 0;
-        }
+        h2:first-of-type { margin-top: 0; }
 
         h3 {
-            font-size: 10.5pt;
+            font-size: 11pt;
             font-weight: 700;
             color: #000;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
 
         .role-meta {
-            font-size: 9.5pt;
+            font-size: 10pt;
             color: var(--light-text);
             font-weight: 500;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
         }
 
-        .job-location {
-            font-style: italic;
-            margin-bottom: 6px;
-        }
-
-        p {
-            margin-bottom: 8px; /* Compact */
-            text-align: left;
-            font-size: 10pt;
-        }
-
-        ul {
-            list-style-type: disc;
-            margin-left: 16px;
-            margin-bottom: 12px; /* Compact */
-        }
-
-        li {
-            margin-bottom: 3px; /* Compact */
-            padding-left: 4px;
-        }
-
-        .job, .project {
-            margin-bottom: 15px; /* Compact */
-        }
-
-        /* RIGHT COLUMN SPECIFICS */
-        .right-column h2 {
-            margin-top: 0px;
-            margin-bottom: 10px;
-        }
-
-        .right-column section {
-            margin-bottom: 20px; /* Compact */
-        }
-
-        .skill-group {
-            margin-bottom: 12px;
-        }
+        p { margin-bottom: 10px; text-align: left; font-size: 10.5pt; color: #374151; }
         
+        ul { list-style-type: disc; margin-left: 16px; margin-bottom: 15px; }
+        li { margin-bottom: 5px; padding-left: 2px; }
+
+        /* SKILL PILLS (Visual Enhancement) */
+        .skill-group { margin-bottom: 15px; }
         .skill-label {
             display: block;
             color: var(--primary-color);
             font-weight: 700;
             font-size: 10pt;
-            margin-bottom: 2px;
-        }
-
-        .skill-list {
-            font-size: 10pt;
-            color: var(--text-color);
-            line-height: 1.4;
-        }
-
-        .edu-block, .cert-block {
-            margin-bottom: 15px;
-        }
-
-        .edu-school {
-            font-size: 10pt;
-            color: var(--text-color);
-            font-weight: 500;
+            margin-bottom: 6px;
         }
         
-        .edu-meta {
-            font-size: 9.5pt;
-            color: var(--light-text);
-        }
-
-        .cert-list {
-            margin-left: 0;
-            list-style-type: none;
-        }
-        
-        .cert-list li {
-            font-size: 9.5pt;
-            margin-bottom: 4px;
-            padding-left: 0;
+        .skill-tags {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
+        .skill-tag {
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 9.5pt;
+            font-weight: 500;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* EDUCATION & CERTIFICATIONS */
+        .edu-block, .cert-block { margin-bottom: 18px; }
+        .edu-school { font-size: 10.5pt; color: #111827; font-weight: 600; }
+        .edu-meta { font-size: 10pt; color: var(--light-text); font-style: italic;}
+
+        a.link { 
+            color: var(--primary-color); 
+            text-decoration: none; 
+            font-weight: 600; 
             border-bottom: 1px dotted var(--primary-color);
         }
 
-        /* -------------------------------------------------- */
-        /* AI WIDGET STYLES (Gemini Integration)              */
-        /* -------------------------------------------------- */
-
-        .ai-fab {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #1e293b, #334155);
-            border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 1000;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 2px solid white;
-            font-size: 24px;
+        /* --- EDITABLE MODE --- */
+        [contenteditable="true"] {
+            outline: 2px dashed #fbbf24;
+            background: rgba(255, 255, 0, 0.05);
+            cursor: text;
         }
 
-        .ai-fab:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media screen and (max-width: 850px) {
+            body { padding: 10px; align-items: flex-start; overflow-x: scroll; }
+            .controls-wrapper { width: 210mm; } 
         }
 
-        .ai-window {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 350px;
-            height: 500px;
-            background: var(--chat-bg);
-            border-radius: 12px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-            display: none; /* Hidden by default */
-            flex-direction: column;
-            z-index: 1000;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .ai-window.open {
-            display: flex;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .ai-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 15px;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .close-btn {
-            cursor: pointer;
-            font-size: 18px;
-            opacity: 0.8;
-        }
-        .close-btn:hover { opacity: 1; }
-
-        .chat-area {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background-color: #f8fafc;
-        }
-
-        .message {
-            max-width: 85%;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 9pt;
-            line-height: 1.4;
-        }
-
-        .ai-message {
-            background: var(--ai-msg-bg);
-            color: var(--text-color);
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .user-message {
-            background: var(--user-msg-bg);
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
-        }
-
-        .suggestions {
-            display: flex;
-            gap: 8px;
-            padding: 10px 15px;
-            background: white;
-            border-top: 1px solid var(--border-color);
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        .suggestion-pill {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 8pt;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--primary-color);
-        }
-
-        .suggestion-pill:hover {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .input-area {
-            padding: 10px 15px;
-            background: white;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 20px;
-            outline: none;
-            font-family: inherit;
-            font-size: 9pt;
-        }
-
-        .chat-input:focus {
-            border-color: var(--primary-color);
-        }
-
-        .send-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .typing-indicator {
-            font-size: 8pt;
-            color: #64748b;
-            margin-left: 5px;
-            display: none;
-        }
-
-        /* Print Button Styles */
-        .print-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background-color 0.2s;
-            z-index: 999;
-        }
-
-        .print-btn:hover {
-            background-color: var(--accent-color);
-        }
-
-        /* Markdown Styles inside Chat */
-        .ai-message strong { font-weight: 600; }
-        .ai-message ul { margin-left: 15px; margin-bottom: 5px; }
-        .ai-message p { margin-bottom: 5px; }
-
-        /* PRINT MEDIA QUERY */
+        /* --- SIMPLE PRINT STYLES: single-page, balanced resume --- */
         @media print {
-            @page { margin: 0; size: auto; }
-            .print-btn, .ai-fab, .ai-window { display: none !important; }
-            html, body { margin: 0; padding: 0; background: white; height: 100%; width: 100%; }
-            .resume-container { box-shadow: none; width: 100%; min-height: auto; margin: 0; padding: 35px 40px; break-inside: avoid; }
+            @page {
+                size: 210mm 297mm;
+                margin: 6mm 8mm;
+            }
+            body {
+                padding: 0;
+                margin: 0;
+                background: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                /* Scale resume to 125% when printing */
+                zoom: 1.11;
+            }
+            .controls-wrapper,
+            .ai-fab,
+            .ai-window { display: none !important; }
+
+            .resume-wrapper { display: none !important; }
+            .resume-wrapper.active { display: flex !important; }
+
+            .resume-container {
+                width: 100%;
+                max-width: 210mm;
+                margin: 0 auto;
+                padding: 22px 26px 24px;
+                box-shadow: none;
+                border: none;
+            }
+
+            /* Spacing tuned so content is dense but readable */
+            header {
+                padding-bottom: 6px;
+                margin-bottom: 10px;
+            }
+            h1 { font-size: 26pt; margin-bottom: 4px; }
+            .contact-info { font-size: 10pt; gap: 8px; }
+            .qr-code { width: 50px; height: 50px; }
+
+            h2 {
+                font-size: 11pt;
+                margin-top: 12px;
+                margin-bottom: 6px;
+                padding-bottom: 3px;
+            }
+            h2:first-of-type { margin-top: 0; }
+            h3 { font-size: 10pt; margin-bottom: 2px; }
+            .role-meta { font-size: 9.5pt; margin-bottom: 3px; }
+            p { font-size: 10pt; line-height: 1.4; margin-bottom: 6px; }
+            ul { margin-bottom: 8px; }
+            li { font-size: 10pt; line-height: 1.4; margin-bottom: 3px; }
+            .skill-group { margin-bottom: 8px; }
+            .skill-tags { gap: 4px; }
+            .skill-tag { font-size: 9.5pt; padding: 2px 6px; }
+            .edu-block, .cert-block { margin-bottom: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Print Button -->
-    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
-
-    <!-- Resume Container -->
-    <div class="resume-container" id="resumeContent">
-        <!-- HEADER -->
-        <header>
-            <h1>Vinay Kumar</h1>
-            <div class="contact-info">
-                <span>Kolkata, 700102</span>
-                <span class="separator">•</span>
-                <span>+91 6204078366</span>
-                <span class="separator">•</span>
-                <span>vinaykrraj333@gmail.com</span>
+    <!-- CONTROL PANEL -->
+    <div class="controls-wrapper">
+        <div class="controls-container">
+            <div class="tabs">
+                <button class="btn active tab-btn" onclick="switchTab('profile1')">
+                    <i class="fa-solid fa-code"></i> Resume 1 (Tech)
+                </button>
+                <button class="btn tab-btn" onclick="switchTab('profile2')">
+                    <i class="fa-solid fa-headset"></i> Resume 2 (Support)
+                </button>
             </div>
-        </header>
-
-        <div class="content-grid">
             
-            <!-- LEFT COLUMN (Main Content) -->
-            <div class="left-column">
-                
-                <!-- SUMMARY -->
-                <h2>Summary</h2>
-                <p>
-                    Accomplished Chat Support Representative at Tech Mahindra, excelling in customer service and problem-solving. Leveraged communication skills to resolve 90% of issues on first contact. Proficient in React.js and Git, enhancing team collaboration and technical support. Recognized for delivering exceptional service while managing multiple customer interactions efficiently.
-                </p>
-
-                <!-- EXPERIENCE -->
-                <h2>Experience</h2>
-                
-                <div class="job">
-                    <h3>Chat Support Representative</h3>
-                    <div class="role-meta">
-                        <span>Tech Mahindra</span>
-                        <span>08/2025 – 12/2025</span>
-                    </div>
-                    <div class="role-meta job-location">Kolkata, IN</div>
-                    <ul>
-                        <li>Assisted customers with order processing inquiries via chat support.</li>
-                        <li>Delivered high-quality customer support while adhering to company policies.</li>
-                        <li>Utilized chat tools efficiently to manage multiple customer conversations simultaneously.</li>
-                    </ul>
-                </div>
-
-                <div class="job">
-                    <h3>Customer Service Executive</h3>
-                    <div class="role-meta">
-                        <span>Fusion CX (Meesho Project)</span>
-                        <span>03/2025 – 05/2025</span>
-                    </div>
-                    <ul>
-                        <li>Handled inbound voice support in Hindi and English for ecommerce customers.</li>
-                        <li>Resolved most issues during first contact, minimizing escalations.</li>
-                        <li>Maintained call logs and communicated unresolved issues to backend teams.</li>
-                        <li>Known for clear, calm communication even under pressure.</li>
-                    </ul>
-                </div>
-
-                <!-- PROJECTS -->
-                <h2>Projects</h2>
-                
-                <div class="project">
-                    <h3>Leo Mark App</h3>
-                    <p>
-                        A complete personal productivity and routine management platform. Combines daily routine tracking (e.g., brushing, meals, study, gym) with dynamic task management features.
-                    </p>
-                    <ul>
-                        <li>Implemented task filtering, status grouping, priority tags, and routine-based scheduling.</li>
-                        <li>Integrated Eisenhower Matrix smart logic for task prioritization.</li>
-                        <li>Built with <strong>React.js</strong> and <strong>Firebase</strong> (Firestore, Auth), styled with <strong>Tailwind CSS</strong>, and hosted on <strong>Vercel</strong>.</li>
-                    </ul>
-                </div>
-
-                <!-- LANGUAGES -->
-                <h2>Languages</h2>
-                <ul>
-                    <li><strong>Hindi:</strong> Fluent</li>
-                    <li><strong>English:</strong> Conversational</li>
-                </ul>
-
+            <div class="tabs">
+                <button class="btn btn-edit" onclick="toggleEditMode()" id="editBtn">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                </button>
+                <button class="btn" onclick="toggleDarkMode()">
+                    <i class="fa-solid fa-moon"></i> Theme
+                </button>
+                <button class="btn btn-print" onclick="window.print()">
+                    <i class="fa-solid fa-print"></i> Print
+                </button>
             </div>
+        </div>
+    </div>
 
-            <!-- RIGHT COLUMN (Sidebar) -->
-            <div class="right-column">
-                
-                <!-- SKILLS -->
-                <section>
-                    <h2>Skills</h2>
-                    <div class="skill-group">
-                        <span class="skill-label">Web Development</span>
-                        <div class="skill-list">React.js, Next.js, JavaScript, Python, Java, HTML5, CSS3, Tailwind CSS, Firebase</div>
+    <!-- ======================================================= -->
+    <!-- RESUME 1: VINAY KUMAR (TECH PROFILE)                    -->
+    <!-- ======================================================= -->
+    <div id="profile1" class="resume-wrapper active">
+        <div class="resume-container">
+            <header>
+                <div class="header-content">
+                    <h1 class="editable">Vinay Kumar</h1>
+                    <div class="contact-info">
+                        <div class="contact-item"><i class="fa-solid fa-location-dot"></i> <span class="editable">Kolkata, 700102</span></div>
+                        <div class="contact-item"><i class="fa-solid fa-phone"></i> <span class="editable">+91 6204078366</span></div>
+                        <div class="contact-item"><i class="fa-solid fa-envelope"></i> <span class="editable">vinaykrraj333@gmail.com</span></div>
+                        <div class="contact-item"><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/mr-vinay-kumar-5b5732199" target="_blank">LinkedIn Profile</a></div>
                     </div>
-                    <div class="skill-group">
-                        <span class="skill-label">Tools & Version Control</span>
-                        <div class="skill-list">Git, GitHub, Vercel, VS Code</div>
-                    </div>
-                    <div class="skill-group">
-                        <span class="skill-label">Data Management</span>
-                        <div class="skill-list">Microsoft Excel, Google Sheets</div>
-                    </div>
-                    <div class="skill-group">
-                        <span class="skill-label">Soft Skills</span>
-                        <div class="skill-list">Communication, Customer Service, Tech Support, Team Collaboration, Problem Solving</div>
-                    </div>
-                </section>
+                </div>
+                <!-- Dynamic QR Code pointing to Portfolio -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vinay-leo-portfolio.vercel.app/" alt="Portfolio QR" class="qr-code">
+            </header>
 
-                <!-- EDUCATION -->
-                <section>
-                    <h2>Education</h2>
-                    
-                    <div class="edu-block">
-                        <h3>B. Tech — CSE</h3>
-                        <div class="edu-school">Budge Budge Institute of Technology</div>
-                        <div class="edu-meta">Kolkata | Expected 06/2027</div>
-                        <div class="edu-meta">Currently in 3rd Year</div>
-                    </div>
+            <div class="content-grid">
+                <div class="left-column">
+                    <h2>Professional Summary</h2>
+                    <p class="editable">
+                        Results-oriented <strong>Computer Science Engineering Student</strong> and <strong>Customer Support Professional</strong> with expertise in <strong>React.js</strong> and technical troubleshooting. Proven track record of resolving 90% of customer issues on first contact at Tech Mahindra. Skilled in building responsive web applications using <strong>Next.js</strong> and <strong>Firebase</strong>.
+                    </p>
 
-                    <div class="edu-block">
-                        <h3>Science (12th)</h3>
-                        <div class="edu-school">R.P.S College, Patna</div>
-                        <div class="edu-meta">GPA: 70.4%</div>
-                    </div>
-
-                    <div class="edu-block">
-                        <h3>10th Grade</h3>
-                        <div class="edu-school">Vidya Niketan, Patna</div>
-                        <div class="edu-meta">GPA: 61.4%</div>
-                    </div>
-                </section>
-
-                <!-- CERTIFICATIONS -->
-                <section>
-                    <h2>Certifications</h2>
-                    <div class="cert-block">
-                        <h3>Kushal Yuva Program</h3>
-                        <div class="edu-school">Bihar Skill Development Mission</div>
-                        <ul class="cert-list">
-                            <li><span>BS-CIT (IT):</span> <strong>82.11%</strong></li>
-                            <li><span>BS-CLS (Language):</span> <strong>92.67%</strong></li>
-                            <li><span>BS-CSS (Soft Skills):</span> <strong>90.73%</strong></li>
+                    <h2>Professional Experience</h2>
+                    <div class="job">
+                        <h3 class="editable">Chat Support Representative</h3>
+                        <div class="role-meta"><span class="editable">Tech Mahindra</span><span class="editable">08/2025 – 12/2025</span></div>
+                        <ul class="editable">
+                            <li>Facilitated order processing and provided technical product support via live chat, ensuring high CSAT scores.</li>
+                            <li>Maintained 100% adherence to company compliance guidelines while delivering high-quality service.</li>
+                            <li>Managed 3+ simultaneous customer conversations efficiently using CRM tools.</li>
                         </ul>
                     </div>
-                </section>
-
-                <!-- WEBSITE -->
-                <section>
-                    <h2>Portfolio</h2>
-                    <div class="skill-list">
-                        <a href="https://vinay-leo-portfolio.vercel.app/" target="_blank">vinay-leo-portfolio.vercel.app</a>
+                    <div class="job">
+                        <h3 class="editable">Customer Service Executive</h3>
+                        <div class="role-meta"><span class="editable">Fusion CX (Meesho Project)</span><span class="editable">03/2025 – 05/2025</span></div>
+                        <ul class="editable">
+                            <li>Provided inbound voice support in Hindi and English for e-commerce customers.</li>
+                            <li>Achieved a high First Call Resolution (FCR) rate, minimizing escalations.</li>
+                            <li>Documented call logs accurately and coordinated with backend teams.</li>
+                        </ul>
                     </div>
-                </section>
 
+                    <h2>Technical Projects</h2>
+                    <div class="project">
+                        <h3 class="editable">Leo Mark App (Productivity)</h3>
+                        <p class="editable">Developed a comprehensive productivity app featuring habit tracking and dynamic task management.</p>
+                        <ul class="editable">
+                            <li>Engineered a responsive UI using <strong>React.js</strong> and <strong>Tailwind CSS</strong>.</li>
+                            <li>Implemented secure backend using <strong>Firebase Firestore</strong> and <strong>Authentication</strong>.</li>
+                            <li>Integrated the Eisenhower Matrix algorithm for task prioritization.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <section>
+                        <h2>Technical Skills</h2>
+                        <div class="skill-group">
+                            <span class="skill-label">Web Development</span>
+                            <div class="skill-tags">
+                                <span class="skill-tag">React.js</span>
+                                <span class="skill-tag">Next.js</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">HTML5</span>
+                                <span class="skill-tag">CSS3</span>
+                                <span class="skill-tag">Tailwind</span>
+                            </div>
+                        </div>
+                        <div class="skill-group">
+                            <span class="skill-label">Backend & Tools</span>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Firebase</span>
+                                <span class="skill-tag">Git/GitHub</span>
+                                <span class="skill-tag">VS Code</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+                        <div class="skill-group">
+                            <span class="skill-label">Professional</span>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Troubleshooting</span>
+                                <span class="skill-tag">CRM</span>
+                                <span class="skill-tag">Problem Solving</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Education</h2>
+                        <div class="edu-block">
+                            <h3 class="editable">B. Tech — CSE</h3>
+                            <div class="edu-school editable">Budge Budge Institute of Technology</div>
+                            <div class="edu-meta editable">Expected Jun 2027</div>
+                        </div>
+                        <div class="edu-block">
+                            <h3 class="editable">Intermediate (Science)</h3>
+                            <div class="edu-school editable">R.P.S College, Patna</div>
+                            <div class="edu-meta editable">GPA: 70.4%</div>
+                        </div>
+                        <div class="edu-block">
+                            <h3 class="editable">Matriculation (10th)</h3>
+                            <div class="edu-school editable">Vidya Niketan, Patna</div>
+                            <div class="edu-meta editable">GPA: 61.4%</div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Certifications</h2>
+                        <div class="cert-block">
+                            <h3 class="editable">Kushal Yuva Program</h3>
+                            <div class="edu-school editable">Bihar Skill Development Mission</div>
+                            <ul class="editable" style="font-size: 9.5pt; margin-top:5px; margin-left: 15px;">
+                                <li>BS-CIT (IT): 82.11%</li>
+                                <li>BS-CLS (Lang): 92.67%</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Languages</h2>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Hindi (Native)</span>
+                            <span class="skill-tag">English (Professional)</span>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Portfolio</h2>
+                        <div class="skill-list" style="margin-top:5px;">
+                            <a href="https://vinay-leo-portfolio.vercel.app/" target="_blank" class="link">vinay-leo-portfolio.vercel.app</a>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- AI Floating Action Button -->
-    <div class="ai-fab" onclick="toggleChat()">
-        ✨
-    </div>
+    <!-- ======================================================= -->
+    <!-- RESUME 2: VINAY KUMAR (SUPPORT PROFILE)                 -->
+    <!-- ======================================================= -->
+    <div id="profile2" class="resume-wrapper">
+        <div class="resume-container">
+            <header>
+                <div class="header-content">
+                    <h1 class="editable">Vinay Kumar</h1>
+                    <div class="contact-info">
+                        <div class="contact-item"><i class="fa-solid fa-location-dot"></i> <span class="editable">Kolkata, 700102</span></div>
+                        <div class="contact-item"><i class="fa-solid fa-phone"></i> <span class="editable">+91 6204078366</span></div>
+                        <div class="contact-item"><i class="fa-solid fa-envelope"></i> <span class="editable">vinaykrraj333@gmail.com</span></div>
+                        <div class="contact-item"><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/mr-vinay-kumar-5b5732199" target="_blank">LinkedIn Profile</a></div>
+                    </div>
+                </div>
+            </header>
 
-    <!-- AI Chat Window -->
-    <div class="ai-window" id="aiWindow">
-        <div class="ai-header">
-            <span>Vinay's AI Assistant</span>
-            <span class="close-btn" onclick="toggleChat()">✕</span>
-        </div>
-        <div class="chat-area" id="chatArea">
-            <div class="message ai-message">
-                Hello! I'm an AI powered by <strong>Gemini</strong>. I can answer questions about Vinay's resume or draft a cover letter for you.
+            <div class="content-grid">
+                <!-- Main Column -->
+                <div class="left-column">
+                    <h2>Professional Summary</h2>
+                    <p class="editable">
+                        Motivated Customer Support professional with strong experience in support-based roles and user communication. Proven ability to resolve over 90% of issues during first contact through effective troubleshooting and customer handling strategies. Recognized for adaptability, teamwork, and delivering a great user experience while managing multiple interactions efficiently.
+                    </p>
+
+                    <h2>Professional Experience</h2>
+                    <div class="job">
+                        <h3 class="editable">Chat Support Representative</h3>
+                        <div class="role-meta"><span class="editable">Tech Mahindra</span><span class="editable">08/2025 – 12/2025</span></div>
+                        <div class="role-meta" style="font-style:italic;">Kolkata, IN</div>
+                        <ul class="editable">
+                            <li>Assisted customers with order processing and product-related support via chat.</li>
+                            <li>Delivered high-quality service while adhering to company compliance guidelines.</li>
+                            <li>Managed multiple customer conversations simultaneously while maintaining accuracy.</li>
+                        </ul>
+                    </div>
+
+                    <div class="job">
+                        <h3 class="editable">Customer Service Executive</h3>
+                        <div class="role-meta"><span class="editable">Fusion CX (Meesho Project)</span><span class="editable">03/2025 – 05/2025</span></div>
+                        <ul class="editable">
+                            <li>Provided inbound call support in Hindi and English for ecommerce customers.</li>
+                            <li>Resolved customer issues efficiently, reducing need for escalation.</li>
+                            <li>Maintained call logs and communicated unresolved issues to backend teams.</li>
+                            <li>Recognized for calm, clear communication during high-pressure situations.</li>
+                        </ul>
+                    </div>
+
+                    <h2>Certifications</h2>
+                    <div class="cert-block">
+                        <h3 class="editable">Kushal Yuva Program</h3>
+                        <div class="edu-school editable">Bihar Skill Development Mission</div>
+                        <ul class="editable">
+                            <li>BS-CIT (Information Technology): 82.11%</li>
+                            <li>BS-CLS (Language Skills): 92.67%</li>
+                            <li>BS-CSS (Soft Skills): 90.73%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="right-column">
+                    <section>
+                        <h2>Core Competencies</h2>
+                        <div class="skill-group">
+                            <span class="skill-label">Professional Skills</span>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Customer Service</span>
+                                <span class="skill-tag">Technical Support</span>
+                                <span class="skill-tag">Communication</span>
+                                <span class="skill-tag">Problem Solving</span>
+                                <span class="skill-tag">Teamwork</span>
+                            </div>
+                        </div>
+                        <div class="skill-group">
+                            <span class="skill-label">Software & Tools</span>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Microsoft Excel</span>
+                                <span class="skill-tag">Google Sheets</span>
+                                <span class="skill-tag">CRM Systems</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Education</h2>
+                        <div class="edu-block">
+                            <h3 class="editable">Intermediate (Science)</h3>
+                            <div class="edu-school editable">R.P.S College, Patna</div>
+                            <div class="edu-meta editable">GPA: 70.4%</div>
+                        </div>
+                        <div class="edu-block">
+                            <h3 class="editable">Matriculation (10th)</h3>
+                            <div class="edu-school editable">Vidya Niketan, Patna</div>
+                            <div class="edu-meta editable">GPA: 61.4%</div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Languages</h2>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Hindi (Fluent)</span>
+                            <span class="skill-tag">English (Conversational)</span>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
-        <div class="typing-indicator" id="typingIndicator">AI is typing...</div>
-        
-        <div class="suggestions">
-            <div class="suggestion-pill" onclick="sendSuggestion('Summarize his web dev skills')">Summarize skills</div>
-            <div class="suggestion-pill" onclick="sendSuggestion('Write a cover letter for a React Developer role')">✨ Cover Letter</div>
-            <div class="suggestion-pill" onclick="sendSuggestion('What is his education background?')">Education</div>
-        </div>
-
-        <div class="input-area">
-            <input type="text" id="userInput" class="chat-input" placeholder="Ask about Vinay..." onkeypress="handleKeyPress(event)">
-            <button class="send-btn" onclick="sendMessage()">➤</button>
-        </div>
     </div>
 
-    <!-- JAVASCRIPT FOR GEMINI INTEGRATION -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        const apiKey = ""; // Runtime injection
-        let chatHistory = [];
+        // --- 1. TABS LOGIC ---
+        function switchTab(profileId) {
+            document.querySelectorAll('.resume-wrapper').forEach(el => el.classList.remove('active'));
+            document.getElementById(profileId).classList.add('active');
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
 
-        function toggleChat() {
-            const win = document.getElementById('aiWindow');
-            win.classList.toggle('open');
-            // Scroll to bottom when opening
-            if(win.classList.contains('open')) {
-                const chatArea = document.getElementById('chatArea');
-                chatArea.scrollTop = chatArea.scrollHeight;
+        // --- 2. DARK MODE LOGIC ---
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // --- 3. EDIT MODE LOGIC ---
+        let isEditing = false;
+        function toggleEditMode() {
+            isEditing = !isEditing;
+            const btn = document.getElementById('editBtn');
+            const editables = document.querySelectorAll('.editable');
+            
+            if (isEditing) {
+                btn.classList.add('editing');
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Done';
+                editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+            } else {
+                btn.classList.remove('editing');
+                btn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> Edit';
+                editables.forEach(el => el.setAttribute('contenteditable', 'false'));
             }
         }
 
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
+        // --- 4. PRINT: Force resume to fill page height ---
+        window.addEventListener('beforeprint', function() {
+            const active = document.querySelector('.resume-wrapper.active');
+            if (active) {
+                active.style.height = '297mm';
+                active.style.minHeight = '297mm';
+                const container = active.querySelector('.resume-container');
+                if (container) {
+                    container.style.height = '297mm';
+                    container.style.minHeight = '297mm';
+                }
             }
-        }
-
-        function sendSuggestion(text) {
-            document.getElementById('userInput').value = text;
-            sendMessage();
-        }
-
-        async function sendMessage() {
-            const inputField = document.getElementById('userInput');
-            const message = inputField.value.trim();
-            if (!message) return;
-
-            // Add User Message to UI
-            addMessageToUI(message, 'user');
-            inputField.value = '';
-            
-            // Show Typing Indicator
-            document.getElementById('typingIndicator').style.display = 'block';
-
-            // Get Resume Text
-            const resumeText = document.getElementById('resumeContent').innerText;
-
-            // Construct Prompt
-            const systemPrompt = `You are an AI assistant representing Vinay Kumar. 
-            Here is his resume content: 
-            ${resumeText}
-            
-            Instructions:
-            1. Answer questions strictly based on this resume.
-            2. Be professional, concise, and polite.
-            3. If asked to write a cover letter, write a professional one using the resume details and the user's input about the role/company.
-            4. If the answer isn't in the resume, say "I don't have that information in the resume."
-            
-            User Query: ${message}`;
-
-            try {
-                // Call Gemini API
-                const response = await callGeminiAPI(systemPrompt);
-                document.getElementById('typingIndicator').style.display = 'none';
-                addMessageToUI(response, 'ai');
-            } catch (error) {
-                console.error(error);
-                document.getElementById('typingIndicator').style.display = 'none';
-                addMessageToUI("Sorry, I'm having trouble connecting to the AI right now.", 'ai');
-            }
-        }
-
-        function addMessageToUI(text, sender) {
-            const chatArea = document.getElementById('chatArea');
-            const msgDiv = document.createElement('div');
-            msgDiv.classList.add('message');
-            msgDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
-            
-            // Simple Markdown parsing for bold text
-            let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            // Handle newlines
-            formattedText = formattedText.replace(/\n/g, '<br>');
-            
-            msgDiv.innerHTML = formattedText;
-            chatArea.appendChild(msgDiv);
-            chatArea.scrollTop = chatArea.scrollHeight;
-        }
-
-        async function callGeminiAPI(prompt) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }]
-            };
-
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error(`API Error: ${response.statusText}`);
-            }
-
-            const data = await response.json();
-            return data.candidates[0].content.parts[0].text;
-        }
+        });
     </script>
 </body>
 </html>
